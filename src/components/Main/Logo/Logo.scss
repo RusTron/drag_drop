@@ -19,6 +19,7 @@
       width: $fullSize;
       border-radius: $halfSize;
       cursor: pointer;
+      object-fit: cover;
     }
 
     &--loader {
