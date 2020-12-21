@@ -27,5 +27,5 @@ export const Main = ():Object => {
         />
       </div>
     </div>
-  )
+  );
 };

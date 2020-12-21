@@ -9,27 +9,36 @@ type LogoProps = {
 export const Logo = ({ setDragOver } :LogoProps):Object => {
   const [loading, setLoading] = useState(false);
   const [imageURL, setImageURL] = useState('');
+  const [canNotBeLoaded, setCanNotBeLoaded] = useState(false);
 
   const getUrl = (file) => {
+    if (!file || !(/(jpeg)/g.test(file.type) || /(png)/g.test(file.type))) {
+      setCanNotBeLoaded(true);
+
+      setTimeout(() => {
+        setCanNotBeLoaded(false);
+      }, 3000);
+
+      return setLoading(false);
+    }
+
     const fileReader = new FileReader();
     fileReader.onload = () => {
       setLoading(false);
       setImageURL(fileReader.result);
     };
-
-    fileReader.readAsDataURL(file);
+    return fileReader.readAsDataURL(file);
   };
 
   const onDrop = useCallback((acceptedFiles, rejectedFiles, e): void => {
     setDragOver(false);
     setLoading(true);
-
     if (!(e.type === 'change')) return;
     const file = e.target.files[0];
     getUrl(file);
-  }, []);
+  }, [setDragOver]);
 
-  const { getRootProps, getInputProps } = useDropzone({ onDrop });
+  const { getInputProps } = useDropzone({ onDrop });
 
   const dropElement = (e) => {
     setDragOver(false);
@@ -41,19 +50,18 @@ export const Logo = ({ setDragOver } :LogoProps):Object => {
 
   return (
     <>
-      <div
-        className="container"
-      >
-        <div className="container__logo">
+      <div className="container">
+        <div
+          className="container__logo"
+        >
           <input
             {...getInputProps()}// eslint-disable-line
-            onDrop={dropElement}
             className="container__logo--input"
             id="container-input"
           />
           <label
-            htmlFor="container-input"
             onDrop={dropElement}
+            htmlFor="container-input"
           >
             <Image url={imageURL} />
           </label>
@@ -61,6 +69,9 @@ export const Logo = ({ setDragOver } :LogoProps):Object => {
             <div className="container__logo--loader" />
           )}
         </div>
+        {canNotBeLoaded && (
+          <span className="container--notification">Only for png or jpeg file format</span>
+        )}
         {!loading
           ? (
             <>
@@ -71,14 +82,14 @@ export const Logo = ({ setDragOver } :LogoProps):Object => {
               </p>
               <span className="container--separator">- or -</span>
               <p>
-                <span
+                <label
+                  htmlFor="container-input"
                   className="container--upload"
-                  {...getRootProps()} // eslint-disable-line
                 >
                   {imageURL
                     ? 'Select file to replace'
                     : 'Select file to upload'}
-                </span>
+                </label>
               </p>
             </>
           ) : (
@@ -88,10 +99,7 @@ export const Logo = ({ setDragOver } :LogoProps):Object => {
               </p>
               <span className="container--separator">- or -</span>
               <p>
-                <span
-                  className="container--upload"
-                  {...getRootProps()} // eslint-disable-line
-                >
+                <span>
                   Cancel
                 </span>
               </p>
@@ -99,5 +107,5 @@ export const Logo = ({ setDragOver } :LogoProps):Object => {
           )}
       </div>
     </>
-  )
+  );
 };
