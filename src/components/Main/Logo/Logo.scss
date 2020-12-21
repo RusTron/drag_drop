@@ -1,0 +1,54 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__logo {
+    width: 80px;
+    height: 80px;
+    position: relative;
+    margin-bottom: 9px;
+
+    &--input {
+      display: none;
+    }
+  
+    &--image {
+      height: $fullSize;
+      width: $fullSize;
+      border-radius: $halfSize;
+    }
+
+    &--loader {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: $fullSize;
+      height: $fullSize;
+      border: 1px solid $loadColor;
+      border-radius: $halfSize;
+      border-bottom-color: transparent;
+      animation: anim 1s 0s infinite linear;
+    }
+  }
+
+  &--separator {
+    margin: 8px 0 4px;
+    line-height: 1em;
+  }
+
+  &--upload {
+    color: $loadColor;
+    cursor: pointer;
+  }
+}
+
+@keyframes anim {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}

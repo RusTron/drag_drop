@@ -1,0 +1,48 @@
+@import "../../sass_components";
+
+.component {
+  background-color: $white;
+  height: 590px;
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: calc(10px + 2vmin);
+  border: 1px solid $notActiveLoad;
+  font-family: "Proxima Nova", sans-serif;
+
+  &__header {
+    width: 100%;
+    padding: 21px 0 0 29px;
+    height: 80px;
+    align-self: flex-start;
+    border-bottom: 1px solid $notActiveLoad;
+
+    &--title {
+      text-align: start;
+      font-weight: bold;
+      font-size: 20px;
+      color: #1A2533;
+    }
+
+    &--text {
+      text-align: start;
+      font-size: 12px;
+    }
+  }
+
+  &__body {
+    box-sizing: padding-box;
+    border-top: 19px solid $white;
+    border-right: 20px solid $white;
+    border-bottom: 21px solid $white;
+    border-left: 20px solid $white;
+    width: $fullSize;
+    height: $fullSize;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+  }
+}
