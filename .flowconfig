@@ -1,0 +1,20 @@
+[ignore]
+.*/node_modules/.*
+.*/react-spinners/.*
+.*/src/reportWebVitals\.js
+.*/src/index\.js
+
+[include]
+
+[libs]
+flow-typed
+
+[lints]
+
+[options]
+module.name_mapper='.*\(.css\)' -> 'empty/object'
+module.name_mapper='.*\(.scss\)' -> 'empty/object'
+module.name_mapper.extension='scss' -> '<PROJECT_ROOT>/flowconfig.mock-module.js'
+all=true
+
+[strict]
