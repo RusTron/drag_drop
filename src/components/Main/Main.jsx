@@ -17,8 +17,7 @@ export const Main = ():Object => {
       </div>
       <div
         className="component__body"
-        onDragOver={(e) => {debugger; console.log(e); setDragOver(true)}} //eslint-disable-line
-        onDragEnter={(e) => {debugger; console.log(e); setDragOver(true)}} //eslint-disable-line
+        onDragOver={() => setDragOver(true)}
         onDragLeave={() => setDragOver(false)}
         onDrop={() => setDragOver(false)}
         style={{ backgroundColor: dragOver ? '#F5F9FF' : '#fff' }}
